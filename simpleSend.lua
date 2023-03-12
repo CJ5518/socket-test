@@ -5,15 +5,15 @@ if not arg[1] and not arg[2] then
 end
 local host = arg[1];
 local port = tonumber(arg[2]);
-
-host = socket.dns.toip(host)
+print(host, port);
 local udp = socket.udp()
 
-print("Using host '" ..host.. "' and port " ..port.. "...")
+print("Using host '" .. host .. "' and port " .. port .. "...")
 
 --Ask the stun server
 udp:settimeout(3)
-sent, err = udp:sendto("Hello, world!", host, port);
+for q = 1, 3 do
+sent, err = udp:sendto("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", host, port); end
 if err then print(err) os.exit() end
 
 udp:close();
