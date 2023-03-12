@@ -50,6 +50,7 @@ while true do
 	dgram, err = udp:receive()
 	if not dgram then
 		print(err, " on receive")
+		udp:sendto(data, host, port);
 	else
 		print(dgram);
 	end
