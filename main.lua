@@ -16,7 +16,7 @@ print("Using host '" ..host.. "' and port " ..port.. "...")
 print("Printed data");
 
 --Ask the stun server
-udp:settimeout(3)
+udp:settimeout(5)
 sent, err = udp:sendto(data, host, port);
 if err then print(err) os.exit() end
 
@@ -46,6 +46,16 @@ local ourIp = tostring(binaryData[#binaryData-3]) .. "." ..
 	tostring(binaryData[#binaryData])
 print(ourIp);
 
-io.read();
+
+print(arg[1]);
+
+while true do
+	dgram, err = udp:receive()
+	if not dgram then
+		print(err, " on receive")
+	else
+		print(dgram);
+	end
+end
 
 udp:close();
