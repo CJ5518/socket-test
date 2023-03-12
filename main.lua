@@ -46,9 +46,6 @@ local ourIp = tostring(binaryData[#binaryData-3]) .. "." ..
 	tostring(binaryData[#binaryData])
 print(ourIp);
 
-
-print(arg[1]);
-
 while true do
 	dgram, err = udp:receive()
 	if not dgram then
