@@ -22,22 +22,29 @@ if err then print(err) os.exit() end
 
 --Get from server
 dgram, err = udp:receive()
-if not dgram then print(err, "Second") os.exit() end
+if not dgram then print(err, " on receive") os.exit() end
 
 --Interpret data
 local function hexToDec(nStr)
 	return tonumber(nStr, 16);
 end
 local function decToHex(n)
-	string.format("%x", input * 255)
+	return string.format("%x", tonumber(n));
 end
 
 
-local binaryData = string.byte(dgram, 1, dgram:len());
+local binaryData = {string.byte(dgram, 1, dgram:len())};
 
-print(string.byte(dgram, 1, dgram:len()));
+local portHex = decToHex(binaryData[#binaryData-5]) .. decToHex(binaryData[#binaryData-4]);
+local ourPort = hexToDec(portHex);
 
+print(ourPort);
 
+local ourIp = tostring(binaryData[#binaryData-3]) .. "." ..
+	tostring(binaryData[#binaryData-2]) .. "." ..
+	tostring(binaryData[#binaryData-1]) .. "." ..
+	tostring(binaryData[#binaryData])
+print(ourIp);
 
 io.read();
 
