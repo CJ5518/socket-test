@@ -68,8 +68,8 @@ while true do
 			if file then
 				print("GOT FILE:");
 				local text = file:read("*all");
-				local ip1, ip2, ip3, ip4, theirPort = text:match("(%d+)%.(%d+)%.(%d+)%.(%d+)%:(%d+)");
-				theirPort = tonumber(theirPort);
+				local ip1, ip2, ip3, ip4, portnoy = text:match("(%d+)%.(%d+)%.(%d+)%.(%d+)%:(%d+)");
+				theirPort = tonumber(portnoy);
 				theirIp = string.format("%s.%s.%s.%s", ip1, ip2, ip3, ip4);
 				print(string.format("_%s_ : %d", theirIp, theirPort));
 				file:close();
