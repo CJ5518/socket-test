@@ -42,6 +42,7 @@ local function askStun(sock)
 end
 
 local ourIp, ourPort = askStun(udp);
+local theirIp, theirPort;
 
 print("We are at", ourIp, ourPort);
 
@@ -54,6 +55,20 @@ while true do
 			print("IP and Port are the same");
 		else
 			print("We NEWLY at", ourIp, ourPort);
+		end
+
+		--While we are here, let's check if we have a peer to find
+		if not theirIp then
+			local file = io.open("peer.txt", "r");
+			if file then
+				print("GOT FILE:");
+				local text = file:read("*all");
+				local ip1, ip2, ip3, ip4, theirPort = text:match("(%d+)%.(%d+)%.(%d+)%.(%d+)%:(%d+)");
+				theirPort = tonumber(theirPort);
+				theirIp = string.format("%s.%s.%s.%s", ip1, ip2, ip3, ip4);
+				print(string.format("_%s_ : %d", theirIp, theirPort));
+				file:close();
+			end
 		end
 	else
 		print(dgram);
