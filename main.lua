@@ -2,7 +2,7 @@ local socket = require("socket");
 
 local udp = socket.udp()
 
-udp:settimeout(.1)
+udp:settimeout(1)
 
 local function askStun(sock)
 	local host = "stun.l.google.com";
@@ -62,7 +62,7 @@ while true do
 			for q = 1, 5 do
 				udp:sendto("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", theirIp, theirPort);
 			end
-			print("Sent to " .. theirIp .. ":" .. theirPort);
+			print("Sent to " .. theirIp .. ":" .. theirPort .. " from " .. ourIp .. ":" .. ourPort);
 		end
 
 		--While we are here, let's check if we have a peer to find
