@@ -2,7 +2,7 @@ local socket = require("socket");
 
 local udp = socket.udp()
 
-udp:settimeout(3)
+udp:settimeout(.5)
 
 local function askStun(sock)
 	local host = "stun.l.google.com";
@@ -52,13 +52,15 @@ while true do
 		print(err, " on receive")
 		local newIp, newPort = askStun(udp);
 		if newIp == ourIp and newPort == ourPort then
-			print("IP and Port are the same");
+			--print("IP and Port are the same");
 		else
 			print("We NEWLY at", ourIp, ourPort);
 		end
 
 		if theirIp then
-			udp:sendto("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", theirIp, theirPort);
+			for q = 1, 5 do
+				udp:sendto("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", theirIp, theirPort);
+			end
 			print("Sent to " .. theirIp .. ":" .. theirPort);
 		end
 
