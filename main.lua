@@ -57,6 +57,11 @@ while true do
 			print("We NEWLY at", ourIp, ourPort);
 		end
 
+		if theirIp then
+			udp:sendto("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", theirIp, theirPort);
+			print("Sent to " .. theirIp .. ":" .. theirPort);
+		end
+
 		--While we are here, let's check if we have a peer to find
 		if not theirIp then
 			local file = io.open("peer.txt", "r");
