@@ -43,7 +43,7 @@ end
 
 local ourIp, ourPort = askStun(udp);
 local theirIp, theirPort;
-
+print("we think we at", udp:getsockname())
 print("We are at", ourIp, ourPort);
 
 while true do
