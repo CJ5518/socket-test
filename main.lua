@@ -2,7 +2,7 @@ local socket = require("socket");
 
 local udp = socket.udp()
 
-udp:settimeout(.5)
+udp:settimeout(.1)
 
 local function askStun(sock)
 	local host = "stun.l.google.com";
@@ -55,6 +55,7 @@ while true do
 			--print("IP and Port are the same");
 		else
 			print("We NEWLY at", ourIp, ourPort);
+			os.exit();
 		end
 
 		if theirIp then
